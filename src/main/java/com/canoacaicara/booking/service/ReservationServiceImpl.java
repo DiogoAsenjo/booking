@@ -1,5 +1,6 @@
 package com.canoacaicara.booking.service;
 
+import com.canoacaicara.booking.controller.ReservationNotFoundException;
 import com.canoacaicara.booking.dao.ReservationRepository;
 import com.canoacaicara.booking.entity.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +25,11 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     public Reservation getById(int id) {
-        Optional<Reservation> queryResult = reservationRepository.findById(id);
-        Reservation theReservation = null;
-
-        if(queryResult.isPresent()) {
-            theReservation = queryResult.get();
-        } else {
-            throw new RuntimeException(("Didn't found any reservation!"));
-        }
-
-        return theReservation;
+        return reservationRepository.findById(id).orElseThrow(() -> new ReservationNotFoundException("Reservation with id:" + id + "not found"));
     }
 
     @Override
     public Reservation create(Reservation reservation) {
-        if (reservation.getPerson().equals("Diogo")) throw new RuntimeException("Diogo não");
         return reservationRepository.save(reservation);
     }
 

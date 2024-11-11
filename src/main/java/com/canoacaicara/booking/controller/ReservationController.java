@@ -4,6 +4,7 @@ import com.canoacaicara.booking.entity.Reservation;
 import com.canoacaicara.booking.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,10 @@ public class ReservationController {
     @GetMapping("/reservation")
     public List<Reservation> getAll() {
         return reservationService.getAll();
+    }
+
+    @GetMapping("/reservation/{id}")
+    public Reservation getById(@PathVariable int id) {
+        return reservationService.getById(id);
     }
 }

@@ -22,4 +22,21 @@ public class ReservationDAOJpaImpl implements ReservationDAO {
         TypedQuery<Reservation> queryResult = entityManager.createQuery("FROM Reservation", Reservation.class);
         return queryResult.getResultList();
     }
+
+    @Override
+    public Reservation getById(int id) {
+        return entityManager.find(Reservation.class, id);
+    }
+
+    @Override
+    public Reservation create(Reservation reservation) {
+        Reservation reservationCreated = entityManager.merge(reservation);
+        return reservationCreated;
+    }
+
+    @Override
+    public void deleteById(int id) {
+        Reservation reservationToBeDeleted = entityManager.find(Reservation.class, id);
+        entityManager.remove(reservationToBeDeleted);
+   }
 }

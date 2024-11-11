@@ -31,4 +31,15 @@ public class ReservationController {
     public Reservation create(@RequestBody Reservation reservation) {
         return reservationService.create(reservation);
     }
+
+    @PutMapping("/reservation")
+    public Reservation update(@RequestBody Reservation reservation) {
+        Reservation reservationUpdated = reservationService.create(reservation);
+        return reservationUpdated;
+    }
+
+    @DeleteMapping("/reservation/{id}")
+    public void deleteById(@PathVariable int id) {
+        reservationService.deleteById(id);
+    }
 }

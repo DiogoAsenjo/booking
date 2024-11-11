@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public class ReservationDAOJpaImpl implements ReservationDAO {
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public ReservationDAOJpaImpl(EntityManager entityManager) {

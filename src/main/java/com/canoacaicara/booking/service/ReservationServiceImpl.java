@@ -1,5 +1,7 @@
 package com.canoacaicara.booking.service;
 
+import com.canoacaicara.booking.dto.ReservationDTO;
+import com.canoacaicara.booking.dto.ReservationMapper;
 import com.canoacaicara.booking.exception.ReservationNotFoundException;
 import com.canoacaicara.booking.dao.ReservationRepository;
 import com.canoacaicara.booking.entity.Reservation;
@@ -33,7 +35,9 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public Reservation create(Reservation reservation) {
+    public Reservation create(ReservationDTO reservationDto) {
+        if (reservationDto.getPickupDateTime().after(reservationDto.getReturnDateTime())) throw new RuntimeException("Return date should be higher than pickup.");
+        Reservation reservation = ReservationMapper.INSTANCE.reservationDtoToEntity(reservationDto);
         return reservationRepository.save(reservation);
     }
 

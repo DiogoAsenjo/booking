@@ -1,10 +1,11 @@
 package com.canoacaicara.booking.controller;
 
+import com.canoacaicara.booking.dto.ReservationDTO;
 import com.canoacaicara.booking.entity.Reservation;
 import com.canoacaicara.booking.service.ReservationService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -28,13 +29,13 @@ public class ReservationController {
     }
 
     @PostMapping("/reservation")
-    public Reservation create(@RequestBody Reservation reservation) {
-        return reservationService.create(reservation);
+    public Reservation create(@Valid @RequestBody ReservationDTO reservationDto) {
+        return reservationService.create(reservationDto);
     }
 
     @PutMapping("/reservation")
-    public Reservation update(@RequestBody Reservation reservation) {
-        Reservation reservationUpdated = reservationService.create(reservation);
+    public Reservation update(@RequestBody ReservationDTO reservationDto) {
+        Reservation reservationUpdated = reservationService.create(reservationDto);
         return reservationUpdated;
     }
 

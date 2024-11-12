@@ -3,6 +3,7 @@ package com.canoacaicara.booking.controller;
 import com.canoacaicara.booking.exception.ReservationNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -27,6 +28,18 @@ public class ReservationExceptionHandler {
 
         error.setStatusCode(HttpStatus.BAD_REQUEST.value());
         error.setMessage(exc.getMessage());
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ReservationErrorResponse> handleException(MethodArgumentNotValidException exc) {
+
+        ReservationErrorResponse error = new ReservationErrorResponse();
+
+        error.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        String errorMessage = exc.getBindingResult().getFieldError().getDefaultMessage();
+        error.setMessage(errorMessage);
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }

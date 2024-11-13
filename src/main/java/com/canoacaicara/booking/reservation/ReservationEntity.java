@@ -1,4 +1,4 @@
-package com.canoacaicara.booking.entity;
+package com.canoacaicara.booking.reservation;
 
 import jakarta.persistence.*;
 
@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="reservation")
-public class Reservation {
+public class ReservationEntity {
     //Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +29,9 @@ public class Reservation {
     private String destination;
 
     //Constructors
-    public Reservation() {}
+    public ReservationEntity() {}
 
-    public Reservation(String person, Date pickupDateTime, Date returnDateTime, String canoe, String destination) {
+    public ReservationEntity(String person, Date pickupDateTime, Date returnDateTime, String canoe, String destination) {
         this.person = person;
         this.pickupDateTime = pickupDateTime;
         this.returnDateTime = returnDateTime;

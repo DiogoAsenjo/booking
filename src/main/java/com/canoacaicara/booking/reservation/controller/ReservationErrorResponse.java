@@ -1,4 +1,4 @@
-package com.canoacaicara.booking.controller;
+package com.canoacaicara.booking.reservation.controller;
 
 public class ReservationErrorResponse {
     private int statusCode;

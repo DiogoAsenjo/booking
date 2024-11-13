@@ -1,13 +1,13 @@
-package com.canoacaicara.booking.controller;
+package com.canoacaicara.booking.reservation.controller;
 
-import com.canoacaicara.booking.exception.ReservationNotFoundException;
+import com.canoacaicara.booking.reservation.exception.ReservationNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
+@ControllerAdvice(basePackageClasses = ReservationController.class)
 public class ReservationExceptionHandler {
 
     @ExceptionHandler

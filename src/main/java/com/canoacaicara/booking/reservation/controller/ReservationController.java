@@ -1,8 +1,8 @@
-package com.canoacaicara.booking.controller;
+package com.canoacaicara.booking.reservation.controller;
 
-import com.canoacaicara.booking.dto.ReservationDTO;
-import com.canoacaicara.booking.entity.Reservation;
-import com.canoacaicara.booking.service.ReservationService;
+import com.canoacaicara.booking.reservation.dto.ReservationDTOin;
+import com.canoacaicara.booking.reservation.dto.ReservationDTOout;
+import com.canoacaicara.booking.reservation.service.ReservationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,24 +19,24 @@ public class ReservationController {
     }
 
     @GetMapping("/reservation")
-    public List<Reservation> getAll() {
+    public List<ReservationDTOout> getAll() {
         return reservationService.getAll();
     }
 
     @GetMapping("/reservation/{id}")
-    public Reservation getById(@PathVariable int id) {
+    public ReservationDTOout getById(@PathVariable int id) {
         return reservationService.getById(id);
     }
 
     @PostMapping("/reservation")
-    public Reservation create(@Valid @RequestBody ReservationDTO reservationDto) {
-        return reservationService.create(reservationDto);
+    public ReservationDTOout create(@Valid @RequestBody ReservationDTOin reservationDTOin) {
+        return reservationService.create(reservationDTOin);
     }
 
-    @PutMapping("/reservation")
-    public Reservation update(@RequestBody ReservationDTO reservationDto) {
-        Reservation reservationUpdated = reservationService.create(reservationDto);
-        return reservationUpdated;
+    @PutMapping("/reservation/{id}")
+    public ReservationDTOout update(@PathVariable int id, @RequestBody ReservationDTOin reservationDTOin ) {
+        ReservationDTOout reservationEntityUpdated = reservationService.update(id, reservationDTOin);
+        return reservationEntityUpdated;
     }
 
     @DeleteMapping("/reservation/{id}")

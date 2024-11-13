@@ -1,27 +1,24 @@
-package com.canoacaicara.booking.dto;
+package com.canoacaicara.booking.reservation.dto;
 
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotBlank;
 import java.util.Date;
 
-public class ReservationDTO {
-    @NotBlank(message = "You should inform who will use the canoe")
+public class ReservationDTOout {
+
+    private int id;
+
     private String person;
 
-    @Future(message = "Pickup date should be higher than now")
     private Date pickupDateTime;
 
-    @Future(message = "Return date should be higher than now")
     private Date returnDateTime;
 
-    @NotBlank(message = "You should inform a canoe")
     private String canoe;
 
-    @NotBlank(message = "You should inform your destination")
     private String destination;
 
     //Constructors
-    public ReservationDTO(String person, Date pickupDateTime, Date returnDateTime, String canoe, String destination) {
+    public ReservationDTOout(int id, String person, Date pickupDateTime, Date returnDateTime, String canoe, String destination) {
+        this.id = id;
         this.person = person;
         this.pickupDateTime = pickupDateTime;
         this.returnDateTime = returnDateTime;
@@ -29,15 +26,23 @@ public class ReservationDTO {
         this.destination = destination;
     }
 
-    public ReservationDTO() {
+    public ReservationDTOout() {
     }
 
-    //Getter and setter
-    public @NotBlank String getPerson() {
+    //Getters e Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPerson() {
         return person;
     }
 
-    public void setPerson(@NotBlank String person) {
+    public void setPerson(String person) {
         this.person = person;
     }
 
@@ -57,19 +62,19 @@ public class ReservationDTO {
         this.returnDateTime = returnDateTime;
     }
 
-    public @NotBlank String getCanoe() {
+    public String getCanoe() {
         return canoe;
     }
 
-    public void setCanoe(@NotBlank String canoe) {
+    public void setCanoe(String canoe) {
         this.canoe = canoe;
     }
 
-    public @NotBlank String getDestination() {
+    public String getDestination() {
         return destination;
     }
 
-    public void setDestination(@NotBlank String destination) {
+    public void setDestination(String destination) {
         this.destination = destination;
     }
 }

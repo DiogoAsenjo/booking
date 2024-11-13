@@ -1,4 +1,4 @@
-package com.canoacaicara.booking.exception;
+package com.canoacaicara.booking.reservation.exception;
 
 public class ReservationNotFoundException extends RuntimeException{
     public ReservationNotFoundException(String message) {

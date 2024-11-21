@@ -1,4 +1,4 @@
-package com.canoacaicara.booking.reservation;
+package com.canoacaicara.booking.reservation.entity;
 
 import jakarta.persistence.*;
 

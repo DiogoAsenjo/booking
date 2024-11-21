@@ -3,9 +3,9 @@ package com.canoacaicara.booking.reservation.service;
 import com.canoacaicara.booking.reservation.dto.ReservationDTOin;
 import com.canoacaicara.booking.reservation.dto.ReservationDTOout;
 import com.canoacaicara.booking.reservation.dto.ReservationMapper;
-import com.canoacaicara.booking.reservation.ReservationEntity;
+import com.canoacaicara.booking.reservation.entity.ReservationEntity;
 import com.canoacaicara.booking.reservation.exception.ReservationNotFoundException;
-import com.canoacaicara.booking.reservation.ReservationRepository;
+import com.canoacaicara.booking.reservation.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

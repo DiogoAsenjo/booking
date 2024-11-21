@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: springstudent
+      MYSQL_DATABASE: booking_system
+      MYSQL_USER: springstudent
+      MYSQL_PASSWORD: springstudent
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  springboot-app:
+    build: .
+    image: booking-app
+    container_name: booking-container
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/booking_system
+      SPRING_DATASOURCE_USERNAME: springstudent
+      SPRING_DATASOURCE_PASSWORD: springstudent
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    restart: always
+
+volumes:
+  mysql-data:
+    driver: local

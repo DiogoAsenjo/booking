@@ -1,7 +1,6 @@
 package com.canoacaicara.booking.reservation.service;
 
 import com.canoacaicara.booking.reservation.dto.ReservationDTOin;
-import com.canoacaicara.booking.reservation.ReservationEntity;
 import com.canoacaicara.booking.reservation.dto.ReservationDTOout;
 
 import java.util.List;

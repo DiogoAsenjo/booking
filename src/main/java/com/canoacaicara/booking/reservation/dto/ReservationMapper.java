@@ -1,6 +1,6 @@
 package com.canoacaicara.booking.reservation.dto;
 
-import com.canoacaicara.booking.reservation.ReservationEntity;
+import com.canoacaicara.booking.reservation.entity.ReservationEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

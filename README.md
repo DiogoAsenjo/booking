@@ -1,14 +1,11 @@
-# API para reservade canoas individuais
+# API para reserva de canoas individuais
 
 Projeto criado para ser o backend do sistema de agendamento para uso de embarcações individuais.
 
-# Docker
-Já deixei o projeto dockerizado para quando for subir facilitar minha vida.
+# Como rodar o projeto
+1. Clone o repositório
+2. Gere o .jar do projeto com o comando "./mvnw clean package"
+3. Suba o banco de dados dockerizado com o comando "docker-compose up --build"
 
-## Passo a passo
-1. Gerar o .jar do projeto com o comando "./mvnw clean package"
-2. Feito isso, é necessário atualizar a imagem do projeto com o comando "docker-compose build --no-cache"
-3. Após, basta subir o projeto com o comando "docker-compose up --build"
-
-Pronto, com isso o projeto estará rodando num container!
-Obs.: é necessário ter Docker na máquina rsrs
+Pronto, agora você pode rodar o projeto na sua máquina!
+Obs.: é necessário ter Docker, Java 21 e Maven instalados na sua máquina.

@@ -1,7 +1,7 @@
-package com.canoacaicara.booking.application.usecases;
+package com.canoacaicara.user.application.usecases;
 
-import com.canoacaicara.booking.application.gateways.UserGateway;
-import com.canoacaicara.booking.domain.entity.User;
+import com.canoacaicara.user.application.gateways.UserGateway;
+import com.canoacaicara.user.domain.User;
 
 public class CreateUserInteractor {
     private UserGateway userGateway;

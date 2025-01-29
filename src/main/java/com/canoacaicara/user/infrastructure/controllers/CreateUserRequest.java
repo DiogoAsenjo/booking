@@ -1,6 +1,6 @@
-package com.canoacaicara.booking.domain.entity;
+package com.canoacaicara.user.infrastructure.controllers;
 
-public record User(
+public record CreateUserRequest(
         String name,
         String email,
         String password,

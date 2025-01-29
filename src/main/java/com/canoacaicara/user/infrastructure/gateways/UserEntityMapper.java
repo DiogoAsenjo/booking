@@ -1,7 +1,7 @@
-package com.canoacaicara.booking.infrastructure.gateways;
+package com.canoacaicara.user.infrastructure.gateways;
 
-import com.canoacaicara.booking.domain.entity.User;
-import com.canoacaicara.booking.infrastructure.persistance.UserEntity;
+import com.canoacaicara.user.domain.User;
+import com.canoacaicara.user.infrastructure.persistance.UserEntity;
 
 public class UserEntityMapper {
     UserEntity toEntity(User userDomain) {

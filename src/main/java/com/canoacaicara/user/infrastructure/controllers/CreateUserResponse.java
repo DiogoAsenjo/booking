@@ -1,4 +1,4 @@
-package com.canoacaicara.booking.infrastructure.controllers;
+package com.canoacaicara.user.infrastructure.controllers;
 
 public record CreateUserResponse (String name,
                                  String email,

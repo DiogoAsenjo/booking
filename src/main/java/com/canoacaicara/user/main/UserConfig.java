@@ -1,11 +1,11 @@
-package com.canoacaicara.booking.main;
+package com.canoacaicara.user.main;
 
-import com.canoacaicara.booking.application.gateways.UserGateway;
-import com.canoacaicara.booking.application.usecases.CreateUserInteractor;
-import com.canoacaicara.booking.infrastructure.controllers.UserDTOMapper;
-import com.canoacaicara.booking.infrastructure.gateways.UserEntityMapper;
-import com.canoacaicara.booking.infrastructure.gateways.UserRepositoryGateway;
-import com.canoacaicara.booking.infrastructure.persistance.UserRepository;
+import com.canoacaicara.user.application.gateways.UserGateway;
+import com.canoacaicara.user.application.usecases.CreateUserInteractor;
+import com.canoacaicara.user.infrastructure.controllers.UserDTOMapper;
+import com.canoacaicara.user.infrastructure.gateways.UserEntityMapper;
+import com.canoacaicara.user.infrastructure.gateways.UserRepositoryGateway;
+import com.canoacaicara.user.infrastructure.persistance.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

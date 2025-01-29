@@ -1,7 +1,7 @@
-package com.canoacaicara.booking.infrastructure.controllers;
+package com.canoacaicara.user.infrastructure.controllers;
 
-import com.canoacaicara.booking.application.usecases.CreateUserInteractor;
-import com.canoacaicara.booking.domain.entity.User;
+import com.canoacaicara.user.application.usecases.CreateUserInteractor;
+import com.canoacaicara.user.domain.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,4 +24,6 @@ public class UserController {
         User userCreated = createUserInteractor.createUser(userDomain);
         return userDTOMapper.toResponse(userCreated);
     }
+
+
 }

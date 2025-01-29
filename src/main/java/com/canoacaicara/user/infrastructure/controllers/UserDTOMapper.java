@@ -1,6 +1,6 @@
-package com.canoacaicara.booking.infrastructure.controllers;
+package com.canoacaicara.user.infrastructure.controllers;
 
-import com.canoacaicara.booking.domain.entity.User;
+import com.canoacaicara.user.domain.User;
 
 public class UserDTOMapper {
     CreateUserResponse toResponse(User user) {

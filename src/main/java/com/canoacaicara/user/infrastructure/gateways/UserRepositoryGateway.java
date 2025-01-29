@@ -1,9 +1,9 @@
-package com.canoacaicara.booking.infrastructure.gateways;
+package com.canoacaicara.user.infrastructure.gateways;
 
-import com.canoacaicara.booking.application.gateways.UserGateway;
-import com.canoacaicara.booking.domain.entity.User;
-import com.canoacaicara.booking.infrastructure.persistance.UserEntity;
-import com.canoacaicara.booking.infrastructure.persistance.UserRepository;
+import com.canoacaicara.user.application.gateways.UserGateway;
+import com.canoacaicara.user.domain.User;
+import com.canoacaicara.user.infrastructure.persistance.UserEntity;
+import com.canoacaicara.user.infrastructure.persistance.UserRepository;
 
 public class UserRepositoryGateway implements UserGateway {
     private final UserRepository userRepository;

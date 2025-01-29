@@ -3,8 +3,8 @@ package com.canoacaicara.user.infrastructure.controllers;
 import com.canoacaicara.user.domain.User;
 
 public class UserDTOMapper {
-    CreateUserResponse toResponse(User user) {
-        return new CreateUserResponse(user.name(), user.email(), user.role());
+    UserResponse toResponse(User user) {
+        return new UserResponse(user.name(), user.email(), user.role());
     }
 
     public User toUser(CreateUserRequest request) {

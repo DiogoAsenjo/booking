@@ -2,6 +2,8 @@ package com.canoacaicara.user.main;
 
 import com.canoacaicara.user.application.gateways.UserGateway;
 import com.canoacaicara.user.application.usecases.CreateUserInteractor;
+import com.canoacaicara.user.application.usecases.GetUserInteractor;
+import com.canoacaicara.user.application.usecases.GetUsersInteractor;
 import com.canoacaicara.user.infrastructure.controllers.UserDTOMapper;
 import com.canoacaicara.user.infrastructure.gateways.UserEntityMapper;
 import com.canoacaicara.user.infrastructure.gateways.UserRepositoryGateway;
@@ -14,6 +16,16 @@ public class UserConfig {
     @Bean
     CreateUserInteractor createUserCase(UserGateway userGateway) {
         return new CreateUserInteractor(userGateway);
+    }
+
+    @Bean
+    GetUsersInteractor getUsersInteractor(UserGateway userGateway) {
+        return new GetUsersInteractor(userGateway);
+    }
+
+    @Bean
+    GetUserInteractor getUserInteractor(UserGateway userGateway) {
+        return new GetUserInteractor(userGateway);
     }
 
     @Bean

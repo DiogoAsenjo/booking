@@ -3,14 +3,16 @@ package com.canoacaicara.user.application.usecases;
 import com.canoacaicara.user.application.gateways.UserGateway;
 import com.canoacaicara.user.domain.User;
 
-public class CreateUserInteractor {
+import java.util.List;
+
+public class GetUsersInteractor {
     private final UserGateway userGateway;
 
-    public CreateUserInteractor(UserGateway userGateway) {
+    public GetUsersInteractor(UserGateway userGateway) {
         this.userGateway = userGateway;
     }
 
-    public User createUser(User user) {
-        return userGateway.createUser(user);
+    public List<User> getUsers() {
+        return userGateway.getUsers();
     }
 }

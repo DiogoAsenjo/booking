@@ -5,6 +5,8 @@ import com.canoacaicara.user.domain.User;
 import com.canoacaicara.user.infrastructure.persistance.UserEntity;
 import com.canoacaicara.user.infrastructure.persistance.UserRepository;
 
+import java.util.List;
+
 public class UserRepositoryGateway implements UserGateway {
     private final UserRepository userRepository;
     private final UserEntityMapper userEntityMapper;
@@ -19,5 +21,17 @@ public class UserRepositoryGateway implements UserGateway {
         UserEntity userEntity = userEntityMapper.toEntity(userDomain);
         UserEntity userSaved = userRepository.save(userEntity);
         return userEntityMapper.toDomain(userSaved);
+    }
+
+    @Override
+    public List<User> getUsers() {
+        List<UserEntity> usersEntitty = userRepository.findAll();
+        return usersEntitty.stream().map(userEntityMapper::toDomain).toList();
+    }
+
+    @Override
+    public User getUser(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email);
+        return userEntityMapper.toDomain(userEntity);
     }
 }

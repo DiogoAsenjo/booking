@@ -1,6 +1,7 @@
 package com.canoacaicara.user.infrastructure.persistance;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -9,11 +10,18 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
+    @NotNull
     private String name;
+    @NotNull
+    @Column(unique = true)
     private String email;
+    @NotNull
     private String password;
+    @NotNull
     private String whatsapp;
+    @NotNull
     private String pix;
+    @NotNull
     private String role;
 
     //Constructors

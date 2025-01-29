@@ -1,6 +1,6 @@
 package com.canoacaicara.user.application.usecases;
 
-import com.canoacaicara.user.application.gateways.UserGateway;
+import com.canoacaicara.user.infrastructure.gateways.UserGateway;
 import com.canoacaicara.user.domain.User;
 
 public class GetUserInteractor {

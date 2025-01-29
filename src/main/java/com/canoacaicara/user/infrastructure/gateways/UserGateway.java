@@ -1,4 +1,4 @@
-package com.canoacaicara.user.application.gateways;
+package com.canoacaicara.user.infrastructure.gateways;
 
 import com.canoacaicara.user.domain.User;
 

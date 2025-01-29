@@ -1,6 +1,6 @@
 package com.canoacaicara.user.main;
 
-import com.canoacaicara.user.application.gateways.UserGateway;
+import com.canoacaicara.user.infrastructure.gateways.UserGateway;
 import com.canoacaicara.user.application.usecases.CreateUserInteractor;
 import com.canoacaicara.user.application.usecases.GetUserInteractor;
 import com.canoacaicara.user.application.usecases.GetUsersInteractor;

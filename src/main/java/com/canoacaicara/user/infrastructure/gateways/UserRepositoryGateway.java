@@ -1,6 +1,5 @@
 package com.canoacaicara.user.infrastructure.gateways;
 
-import com.canoacaicara.user.application.gateways.UserGateway;
 import com.canoacaicara.user.domain.User;
 import com.canoacaicara.user.infrastructure.persistance.UserEntity;
 import com.canoacaicara.user.infrastructure.persistance.UserRepository;

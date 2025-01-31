@@ -8,4 +8,7 @@ public record User(
         String pix,
         String role
 ) {
+    public User userWithHashedPassowrd(String hashedPassword) {
+        return new User(name, email, hashedPassword,whatsapp, pix, role);
+    }
 }

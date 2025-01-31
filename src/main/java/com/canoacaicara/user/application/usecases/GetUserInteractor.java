@@ -3,6 +3,8 @@ package com.canoacaicara.user.application.usecases;
 import com.canoacaicara.user.infrastructure.gateways.UserGateway;
 import com.canoacaicara.user.domain.User;
 
+import java.util.Optional;
+
 public class GetUserInteractor {
     private final UserGateway userGateway;
 
@@ -10,7 +12,7 @@ public class GetUserInteractor {
         this.userGateway = userGateway;
     }
 
-    public User getUser(String email) {
+    public Optional<User> getUser(String email) {
         return userGateway.getUser(email);
     }
 }

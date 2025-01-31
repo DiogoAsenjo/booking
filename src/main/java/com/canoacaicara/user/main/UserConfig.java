@@ -1,5 +1,6 @@
 package com.canoacaicara.user.main;
 
+import com.canoacaicara.user.application.usecases.LoginUserInteractor;
 import com.canoacaicara.user.infrastructure.gateways.UserGateway;
 import com.canoacaicara.user.application.usecases.CreateUserInteractor;
 import com.canoacaicara.user.application.usecases.GetUserInteractor;
@@ -17,6 +18,11 @@ public class UserConfig {
     @Bean
     CreateUserInteractor createUserCase(UserGateway userGateway, PasswordEncoder passwordEncoder) {
         return new CreateUserInteractor(userGateway, passwordEncoder);
+    }
+
+    @Bean
+    LoginUserInteractor loginUserInteractor(UserGateway userGateway, PasswordEncoder passwordEncoder) {
+        return new LoginUserInteractor(userGateway, passwordEncoder);
     }
 
     @Bean

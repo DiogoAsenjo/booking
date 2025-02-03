@@ -1,11 +1,11 @@
 package com.canoacaicara.user.main;
 
+import com.canoacaicara.user.application.mapper.UserDTOMapper;
 import com.canoacaicara.user.application.usecases.LoginUserInteractor;
 import com.canoacaicara.user.infrastructure.gateways.UserGateway;
 import com.canoacaicara.user.application.usecases.CreateUserInteractor;
 import com.canoacaicara.user.application.usecases.GetUserInteractor;
 import com.canoacaicara.user.application.usecases.GetUsersInteractor;
-import com.canoacaicara.user.infrastructure.controllers.UserDTOMapper;
 import com.canoacaicara.user.infrastructure.gateways.UserEntityMapper;
 import com.canoacaicara.user.infrastructure.gateways.UserRepositoryGateway;
 import com.canoacaicara.user.infrastructure.persistance.UserRepository;
@@ -16,8 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class UserConfig {
     @Bean
-    CreateUserInteractor createUserCase(UserGateway userGateway, PasswordEncoder passwordEncoder) {
-        return new CreateUserInteractor(userGateway, passwordEncoder);
+    CreateUserInteractor createUserCase(UserGateway userGateway, PasswordEncoder passwordEncoder, UserDTOMapper userDTOMapper) {
+        return new CreateUserInteractor(userGateway, passwordEncoder, userDTOMapper);
     }
 
     @Bean
@@ -26,13 +26,13 @@ public class UserConfig {
     }
 
     @Bean
-    GetUsersInteractor getUsersInteractor(UserGateway userGateway) {
-        return new GetUsersInteractor(userGateway);
+    GetUsersInteractor getUsersInteractor(UserGateway userGateway, UserDTOMapper userDTOMapper) {
+        return new GetUsersInteractor(userGateway, userDTOMapper);
     }
 
     @Bean
-    GetUserInteractor getUserInteractor(UserGateway userGateway) {
-        return new GetUserInteractor(userGateway);
+    GetUserInteractor getUserInteractor(UserGateway userGateway, UserDTOMapper userDTOMapper) {
+        return new GetUserInteractor(userGateway, userDTOMapper);
     }
 
     @Bean

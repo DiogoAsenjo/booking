@@ -1,5 +1,8 @@
 package com.canoacaicara.user.application.usecases;
 
+import com.canoacaicara.user.application.mapper.UserDTOMapper;
+import com.canoacaicara.user.infrastructure.controllers.CreateUserRequest;
+import com.canoacaicara.user.infrastructure.controllers.UserResponse;
 import com.canoacaicara.user.infrastructure.gateways.UserGateway;
 import com.canoacaicara.user.domain.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,15 +10,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class CreateUserInteractor {
     private final UserGateway userGateway;
     private final PasswordEncoder passwordEncoder;
+    private final UserDTOMapper userDTOMapper;
 
-    public CreateUserInteractor(UserGateway userGateway, PasswordEncoder passwordEncoder) {
+    public CreateUserInteractor(UserGateway userGateway, PasswordEncoder passwordEncoder, UserDTOMapper userDTOMapper) {
         this.userGateway = userGateway;
         this.passwordEncoder = passwordEncoder;
+        this.userDTOMapper = userDTOMapper;
     }
 
-    public User createUser(User user) {
-        String hashedPassword = passwordEncoder.encode(user.password());
-        User userWithHashedPassword = user.userWithHashedPassowrd(hashedPassword);
-        return userGateway.createUser(userWithHashedPassword);
+    public UserResponse createUser(CreateUserRequest request) {
+        User userDomain = userDTOMapper.toUser(request);
+        String hashedPassword = passwordEncoder.encode(userDomain.password());
+        User userWithHashedPassword = userDomain.userWithHashedPassowrd(hashedPassword);
+        User userCreated = userGateway.createUser(userWithHashedPassword);
+        return userDTOMapper.toResponse(userCreated);
     }
 }

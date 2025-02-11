@@ -18,11 +18,16 @@ public class CreateUserInteractor {
         this.userDTOMapper = userDTOMapper;
     }
 
-    public UserResponse createUser(CreateUserRequest request) {
+    public UserResponse createUser(CreateUserRequest request) throws Exception {
         User userDomain = userDTOMapper.toUser(request);
         String hashedPassword = passwordEncoder.encode(userDomain.password());
         User userWithHashedPassword = userDomain.userWithHashedPassowrd(hashedPassword);
-        User userCreated = userGateway.createUser(userWithHashedPassword);
-        return userDTOMapper.toResponse(userCreated);
+
+        try {
+            User userCreated = userGateway.createUser(userWithHashedPassword);
+            return userDTOMapper.toResponse(userCreated);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }

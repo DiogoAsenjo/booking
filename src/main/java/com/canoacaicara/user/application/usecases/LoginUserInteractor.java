@@ -1,5 +1,6 @@
 package com.canoacaicara.user.application.usecases;
 
+import com.canoacaicara.security.jwt.JWTService;
 import com.canoacaicara.user.domain.User;
 import com.canoacaicara.user.infrastructure.gateways.UserGateway;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,11 +10,13 @@ import java.util.Optional;
 public class LoginUserInteractor {
     private final UserGateway userGateway;
     private final PasswordEncoder passwordEncoder;
+    private final JWTService jwtService;
 
 
-    public LoginUserInteractor(UserGateway userGateway, PasswordEncoder passwordEncoder) {
+    public LoginUserInteractor(UserGateway userGateway, PasswordEncoder passwordEncoder, JWTService jwtService) {
         this.userGateway = userGateway;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public String login(String email, String password) {
@@ -29,6 +32,6 @@ public class LoginUserInteractor {
             throw new RuntimeException("Invalid Password");
         }
 
-        return "Logou";
+        return jwtService.generateToken(email);
     }
 }

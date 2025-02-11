@@ -1,5 +1,8 @@
 package com.canoacaicara.user.main;
 
+import com.canoacaicara.security.jwt.AuthenticationFilter;
+import com.canoacaicara.security.jwt.JWTService;
+import com.canoacaicara.security.jwt.UserDetailsServiceImpl;
 import com.canoacaicara.user.application.mapper.UserDTOMapper;
 import com.canoacaicara.user.application.usecases.LoginUserInteractor;
 import com.canoacaicara.user.infrastructure.gateways.UserGateway;
@@ -11,6 +14,9 @@ import com.canoacaicara.user.infrastructure.gateways.UserRepositoryGateway;
 import com.canoacaicara.user.infrastructure.persistance.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -21,8 +27,8 @@ public class UserConfig {
     }
 
     @Bean
-    LoginUserInteractor loginUserInteractor(UserGateway userGateway, PasswordEncoder passwordEncoder) {
-        return new LoginUserInteractor(userGateway, passwordEncoder);
+    LoginUserInteractor loginUserInteractor(UserGateway userGateway, PasswordEncoder passwordEncoder, JWTService jwtService) {
+        return new LoginUserInteractor(userGateway, passwordEncoder, jwtService);
     }
 
     @Bean
@@ -49,4 +55,20 @@ public class UserConfig {
     UserDTOMapper UserDTOMapper() {
         return new UserDTOMapper();
     }
+
+    @Bean
+    JWTService jwtService() {
+        return new JWTService();
+    }
+
+    @Bean
+    AuthenticationFilter authenticationFilter(JWTService jwtService, UserDetailsServiceImpl userDetailsServiceImpl) {
+        return  new AuthenticationFilter(jwtService, userDetailsServiceImpl);
+    }
+
+    @Bean
+    UserDetailsServiceImpl userDetailsService(UserRepository userRepository) {
+        return new UserDetailsServiceImpl(userRepository);
+    }
+
 }

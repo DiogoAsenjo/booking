@@ -55,20 +55,4 @@ public class UserConfig {
     UserDTOMapper UserDTOMapper() {
         return new UserDTOMapper();
     }
-
-    @Bean
-    JWTService jwtService() {
-        return new JWTService();
-    }
-
-    @Bean
-    AuthenticationFilter authenticationFilter(JWTService jwtService, UserDetailsServiceImpl userDetailsServiceImpl) {
-        return  new AuthenticationFilter(jwtService, userDetailsServiceImpl);
-    }
-
-    @Bean
-    UserDetailsServiceImpl userDetailsService(UserRepository userRepository) {
-        return new UserDetailsServiceImpl(userRepository);
-    }
-
 }

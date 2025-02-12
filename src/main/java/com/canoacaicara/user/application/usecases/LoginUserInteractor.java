@@ -1,6 +1,7 @@
 package com.canoacaicara.user.application.usecases;
 
 import com.canoacaicara.security.jwt.JWTService;
+import com.canoacaicara.security.jwt.TokenJWT;
 import com.canoacaicara.user.application.exceptions.UserNotFoundException;
 import com.canoacaicara.user.domain.User;
 import com.canoacaicara.user.infrastructure.gateways.UserGateway;
@@ -20,7 +21,7 @@ public class LoginUserInteractor {
         this.jwtService = jwtService;
     }
 
-    public String login(String email, String password) {
+    public TokenJWT login(String email, String password) {
         Optional<User> userTryingToLogIn = userGateway.getUser(email);
 
         if (userTryingToLogIn.isEmpty()) {
@@ -33,6 +34,8 @@ public class LoginUserInteractor {
             throw new RuntimeException("Invalid Password");
         }
 
-        return jwtService.generateToken(email);
+        String token = jwtService.generateToken(email);
+
+        return new TokenJWT(token);
     }
 }

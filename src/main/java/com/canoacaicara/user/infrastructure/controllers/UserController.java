@@ -1,6 +1,7 @@
 package com.canoacaicara.user.infrastructure.controllers;
 
 import com.canoacaicara.common.ApiReponse;
+import com.canoacaicara.security.jwt.TokenJWT;
 import com.canoacaicara.user.application.usecases.CreateUserInteractor;
 import com.canoacaicara.user.application.usecases.GetUserInteractor;
 import com.canoacaicara.user.application.usecases.GetUsersInteractor;
@@ -46,7 +47,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    String login(@RequestBody LoginUserRequest loginUserRequest) {
-        return loginUserInteractor.login(loginUserRequest.email(), loginUserRequest.password());
+    ResponseEntity<ApiReponse<TokenJWT>> login(@Valid @RequestBody LoginUserRequest loginUserRequest) {
+        ApiReponse<TokenJWT> response = new ApiReponse<>("Logged in successfully!", loginUserInteractor.login(loginUserRequest.email(), loginUserRequest.password()));
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

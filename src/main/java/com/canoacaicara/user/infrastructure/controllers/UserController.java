@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("users")
 public class UserController {
@@ -29,19 +28,21 @@ public class UserController {
     }
 
     @PostMapping()
-    ResponseEntity<ApiReponse> createUser(@Valid @RequestBody CreateUserRequest request) throws Exception {
-        ApiReponse response = new ApiReponse("User created successfully!", createUserInteractor.createUser(request));
+    ResponseEntity<ApiReponse<UserResponse>> createUser(@Valid @RequestBody CreateUserRequest request) throws Exception {
+        ApiReponse<UserResponse> response = new ApiReponse<>("User created successfully!", createUserInteractor.createUser(request));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/")
-    UserResponse getUser(@RequestParam String email) {
-        return getUserInteractor.getUser(email);
+    ResponseEntity<ApiReponse<UserResponse>> getUser(@RequestParam String email) {
+        ApiReponse<UserResponse> response = new ApiReponse<>("User found!", getUserInteractor.getUser(email));
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping
-    List<UserResponse> getUsers() {
-        return getUsersInteractor.getUsers();
+    ResponseEntity<ApiReponse<List<UserResponse>>> getUsers() {
+        ApiReponse<List<UserResponse>> response = new ApiReponse<>("Users found!", getUsersInteractor.getUsers());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping("/login")

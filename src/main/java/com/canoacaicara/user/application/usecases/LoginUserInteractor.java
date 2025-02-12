@@ -1,6 +1,7 @@
 package com.canoacaicara.user.application.usecases;
 
 import com.canoacaicara.security.jwt.JWTService;
+import com.canoacaicara.user.application.exceptions.UserNotFoundException;
 import com.canoacaicara.user.domain.User;
 import com.canoacaicara.user.infrastructure.gateways.UserGateway;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +24,7 @@ public class LoginUserInteractor {
         Optional<User> userTryingToLogIn = userGateway.getUser(email);
 
         if (userTryingToLogIn.isEmpty()) {
-            throw new RuntimeException("User not found");
+            throw new UserNotFoundException("User not found");
         }
 
         User userFound = userTryingToLogIn.get();

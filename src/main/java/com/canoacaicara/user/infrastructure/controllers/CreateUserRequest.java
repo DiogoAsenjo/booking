@@ -13,7 +13,7 @@ public record CreateUserRequest(
         String whatsapp,
         @NotBlank(message = "Pix is mandatory")
         String pix,
-        @NotBlank(message = "role is mandatory")
+        @NotBlank(message = "Role is mandatory")
         String role
 ) {
 }

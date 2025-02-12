@@ -1,5 +1,6 @@
 package com.canoacaicara.user.infrastructure.gateways;
 
+import com.canoacaicara.user.application.exceptions.UserNotFoundException;
 import com.canoacaicara.user.domain.User;
 import com.canoacaicara.user.infrastructure.persistance.UserEntity;
 import com.canoacaicara.user.infrastructure.persistance.UserRepository;

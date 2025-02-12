@@ -1,5 +1,6 @@
 package com.canoacaicara.user.application.usecases;
 
+import com.canoacaicara.user.application.exceptions.UserNotFoundException;
 import com.canoacaicara.user.application.mapper.UserDTOMapper;
 import com.canoacaicara.user.infrastructure.controllers.UserResponse;
 import com.canoacaicara.user.infrastructure.gateways.UserGateway;
@@ -22,7 +23,7 @@ public class GetUsersInteractor {
         List<User> usersDomainFound = userGateway.getUsers();
 
         if (usersDomainFound.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Users not found");
+            throw new UserNotFoundException("Users not found");
         }
 
         return usersDomainFound.stream().map(userDTOMapper::toResponse).toList();

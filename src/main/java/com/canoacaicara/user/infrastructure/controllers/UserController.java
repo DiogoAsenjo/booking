@@ -5,6 +5,7 @@ import com.canoacaicara.user.application.usecases.CreateUserInteractor;
 import com.canoacaicara.user.application.usecases.GetUserInteractor;
 import com.canoacaicara.user.application.usecases.GetUsersInteractor;
 import com.canoacaicara.user.application.usecases.LoginUserInteractor;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping()
-    ResponseEntity<ApiReponse> createUser(@RequestBody CreateUserRequest request) throws Exception {
+    ResponseEntity<ApiReponse> createUser(@Valid @RequestBody CreateUserRequest request) throws Exception {
         ApiReponse response = new ApiReponse("User created successfully!", createUserInteractor.createUser(request));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

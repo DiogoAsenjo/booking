@@ -1,10 +1,12 @@
 package com.canoacaicara.common;
 
+import java.util.List;
+
 public class ApiReponse<T> {
-    private String message;
+    private Object message;
     private T data;
 
-    public ApiReponse(String message, T data) {
+    public ApiReponse(Object message, T data) {
         this.message = message;
         this.data = data;
     }
@@ -17,11 +19,11 @@ public class ApiReponse<T> {
         this.data = data;
     }
 
-    public String getMessage() {
+    public Object getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(Object message) {
         this.message = message;
     }
 }

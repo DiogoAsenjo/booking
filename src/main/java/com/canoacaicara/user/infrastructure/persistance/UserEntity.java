@@ -1,5 +1,6 @@
 package com.canoacaicara.user.infrastructure.persistance;
 
+import com.canoacaicara.common.enums.Roles;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -22,12 +23,12 @@ public class UserEntity {
     @NotNull
     private String pix;
     @NotNull
-    private String role;
+    private Roles role;
 
     //Constructors
     public UserEntity() {}
 
-    public UserEntity(String name, String email, String password, String whatsapp, String pix, String role) {
+    public UserEntity(String name, String email, String password, String whatsapp, String pix, Roles role) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -86,11 +87,11 @@ public class UserEntity {
         this.pix = pix;
     }
 
-    public String getRole() {
+    public Roles getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Roles role) {
         this.role = role;
     }
 }

@@ -6,7 +6,7 @@ import com.canoacaicara.user.infrastructure.controllers.UserResponse;
 
 public class UserDTOMapper {
     public UserResponse toResponse(User user) {
-        return new UserResponse(user.name(), user.email(), user.role());
+        return new UserResponse(user.name(), user.email());
     }
 
     public User toUser(CreateUserRequest request) {

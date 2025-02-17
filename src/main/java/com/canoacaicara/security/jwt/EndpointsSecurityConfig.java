@@ -19,6 +19,10 @@ public class EndpointsSecurityConfig {
             "/users/login"
     };
 
+    public static final String[] ENDPOINTS_ADMIN = {
+        "/users/admin"
+    };
+
     public EndpointsSecurityConfig(AuthenticationFilter authenticationFilter) {
         this.authenticationFilter = authenticationFilter;
     }
@@ -30,6 +34,7 @@ public class EndpointsSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, ENDPOINTS_AUTH_NOT_REQUIRED).permitAll()
+                        .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)

@@ -51,4 +51,11 @@ public class UserController {
         ApiReponse<TokenJWT> response = new ApiReponse<>("Logged in successfully!", loginUserInteractor.login(loginUserRequest.email(), loginUserRequest.password()));
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    //Route to test permission only.
+    @GetMapping("/admin")
+    ResponseEntity<ApiReponse<String>> adminOnly() {
+        ApiReponse<String> response = new ApiReponse<>("You're an admin!", null);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

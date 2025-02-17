@@ -2,6 +2,7 @@ package com.canoacaicara.security.jwt;
 
 import com.canoacaicara.user.infrastructure.persistance.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -17,7 +18,7 @@ public class UserDetailsImpl implements UserDetails {
     //Alterar quando for mexer nos roles
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "professor");
+        return List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
     }
 
     @Override

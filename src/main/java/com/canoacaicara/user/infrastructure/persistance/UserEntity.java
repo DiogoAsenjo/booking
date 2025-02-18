@@ -23,6 +23,7 @@ public class UserEntity {
     @NotNull
     private String pix;
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Roles role;
 
     //Constructors

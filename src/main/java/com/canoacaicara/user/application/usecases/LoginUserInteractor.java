@@ -34,7 +34,7 @@ public class LoginUserInteractor {
             throw new RuntimeException("Invalid Password");
         }
 
-        String token = jwtService.generateToken(email);
+        String token = jwtService.generateToken(userFound);
 
         return new TokenJWT(token);
     }

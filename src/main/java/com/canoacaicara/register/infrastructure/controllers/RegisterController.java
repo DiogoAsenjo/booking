@@ -17,8 +17,7 @@ public class RegisterController {
     }
 
     @PostMapping()
-    ResponseEntity<ApiReponse<RegisterResponse>> createRegister(@Valid @RequestBody CreateRegisterRequest request /*@RequestHeader("Authorization") String token*/) throws Exception {
-        String token = "1234";
+    ResponseEntity<ApiReponse<RegisterResponse>> createRegister(@Valid @RequestBody CreateRegisterRequest request, @RequestHeader("Authorization") String token) throws Exception {
         ApiReponse<RegisterResponse> response = new ApiReponse<>("Register created", createRegisterInteractor.createRegister(request, token));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

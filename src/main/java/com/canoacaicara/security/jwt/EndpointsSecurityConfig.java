@@ -17,7 +17,6 @@ public class EndpointsSecurityConfig {
     public static final String[] ENDPOINTS_AUTH_NOT_REQUIRED = {
             "/users",
             "/users/login",
-            "/registers"
     };
 
     public static final String[] ENDPOINTS_ADMIN = {

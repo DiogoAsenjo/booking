@@ -4,9 +4,10 @@ import com.canoacaicara.common.enums.ActivityType;
 
 import java.util.Date;
 
-public record RegisterResponse(
+public record AllRegistersResponse(
         Date date,
         int quantity,
-        ActivityType activityType
+        ActivityType activityType,
+        String responsible
 ) {
 }

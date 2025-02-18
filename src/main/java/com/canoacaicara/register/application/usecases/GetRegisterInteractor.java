@@ -3,8 +3,10 @@ package com.canoacaicara.register.application.usecases;
 import com.canoacaicara.register.application.exceptions.RegisterNotFoundException;
 import com.canoacaicara.register.application.mapper.RegisterDTOMapper;
 import com.canoacaicara.register.domain.Register;
+import com.canoacaicara.register.infrastructure.controllers.AllRegistersResponse;
 import com.canoacaicara.register.infrastructure.controllers.RegisterResponse;
 import com.canoacaicara.register.infrastructure.gateways.RegisterGateway;
+import com.canoacaicara.register.infrastructure.persistance.RegisterEntity;
 import com.canoacaicara.security.jwt.JWTService;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class GetRegisterInteractor {
         this.jwtService = jwtService;
     }
 
-    public List<RegisterResponse> getRegisters (String token) {
+    public List<RegisterResponse> getUserRegisters(String token) {
         String clearToken = jwtService.clearToken(token);
         int userId = jwtService.getUserIdFromToken(clearToken);
 
@@ -31,5 +33,15 @@ public class GetRegisterInteractor {
         }
 
         return registersFound.stream().map(registerDTOMapper::toResponse).toList();
+    }
+
+    public List<AllRegistersResponse> getAllRegisters() {
+        List<AllRegistersResponse> registersFound = registerGateway.getAllRegisters();
+
+        if (registersFound.isEmpty()) {
+            throw new RegisterNotFoundException("Registers not found");
+        }
+
+        return registersFound;
     }
 }

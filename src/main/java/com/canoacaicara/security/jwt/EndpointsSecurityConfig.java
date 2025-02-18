@@ -20,7 +20,8 @@ public class EndpointsSecurityConfig {
     };
 
     public static final String[] ENDPOINTS_ADMIN = {
-        "/users/admin"
+        "/users/admin",
+        "/registers/all"
     };
 
     public EndpointsSecurityConfig(AuthenticationFilter authenticationFilter) {

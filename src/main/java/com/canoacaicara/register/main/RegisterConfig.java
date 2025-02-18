@@ -25,8 +25,8 @@ public class RegisterConfig {
     }
 
     @Bean
-    RegisterGateway registerGateway(RegisterRepository registerRepository, RegisterEntityMapper registerEntityMapper) {
-        return new RegisterRepositoryGateway(registerRepository, registerEntityMapper);
+    RegisterGateway registerGateway(RegisterRepository registerRepository, RegisterEntityMapper registerEntityMapper, RegisterDTOMapper registerDTOMapper) {
+        return new RegisterRepositoryGateway(registerRepository, registerEntityMapper, registerDTOMapper);
     }
 
     @Bean

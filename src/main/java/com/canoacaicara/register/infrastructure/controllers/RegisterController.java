@@ -28,8 +28,14 @@ public class RegisterController {
     }
 
     @GetMapping()
-    ResponseEntity<ApiReponse<List<RegisterResponse>>> getRegisters(@RequestHeader("Authorization") String token) {
-        ApiReponse<List<RegisterResponse>> response = new ApiReponse<>("Registers found", getRegisterInteractor.getRegisters(token));
+    ResponseEntity<ApiReponse<List<RegisterResponse>>> getUserRegisters(@RequestHeader("Authorization") String token) {
+        ApiReponse<List<RegisterResponse>> response = new ApiReponse<>("Registers found", getRegisterInteractor.getUserRegisters(token));
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/all")
+    ResponseEntity<ApiReponse<List<AllRegistersResponse>>> getAllRegisters() {
+        ApiReponse<List<AllRegistersResponse>> response = new ApiReponse<>("Registers found", getRegisterInteractor.getAllRegisters());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

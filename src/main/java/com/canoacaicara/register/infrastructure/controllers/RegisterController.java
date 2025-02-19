@@ -4,13 +4,11 @@ import com.canoacaicara.common.ApiReponse;
 import com.canoacaicara.register.application.usecases.CreateRegisterInteractor;
 import com.canoacaicara.register.application.usecases.GetRegisterInteractor;
 import jakarta.validation.Valid;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @RestController

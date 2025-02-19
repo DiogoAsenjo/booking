@@ -8,7 +8,7 @@ import com.canoacaicara.register.infrastructure.persistance.RegisterEntity;
 
 public class RegisterDTOMapper {
     public RegisterResponse toResponse(Register register) {
-        return new RegisterResponse(register.date(), register.quantity(), register.activityType());
+        return new RegisterResponse(register.id(), register.date(), register.quantity(), register.activityType());
     }
 
     public Register toRegister(CreateRegisterRequest request, int userId) {
@@ -16,6 +16,6 @@ public class RegisterDTOMapper {
     }
 
     public AllRegistersResponse toAllRegistersResponse(RegisterEntity register) {
-        return new AllRegistersResponse(register.getDate(), register.getQuantity(), register.getActivityType(), register.getUser().getName());
+        return new AllRegistersResponse(register.getId(), register.getDate(), register.getQuantity(), register.getActivityType(), register.getUser().getName());
     }
 }

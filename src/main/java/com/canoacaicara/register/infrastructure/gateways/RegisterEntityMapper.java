@@ -19,6 +19,6 @@ public class RegisterEntityMapper {
     }
 
     Register toDomain(RegisterEntity registerEntity) {
-        return new Register(registerEntity.getUser().getId(), registerEntity.getActivityType(), registerEntity.getDate(), registerEntity.getQuantity());
+        return new Register(registerEntity.getId(), registerEntity.getUser().getId(), registerEntity.getActivityType(), registerEntity.getDate(), registerEntity.getQuantity());
     }
 }

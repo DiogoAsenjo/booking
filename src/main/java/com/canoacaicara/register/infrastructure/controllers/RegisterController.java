@@ -3,6 +3,7 @@ package com.canoacaicara.register.infrastructure.controllers;
 import com.canoacaicara.common.ApiReponse;
 import com.canoacaicara.register.application.usecases.CreateRegisterInteractor;
 import com.canoacaicara.register.application.usecases.GetRegisterInteractor;
+import com.canoacaicara.register.application.usecases.UpdateRegisterInteractor;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,12 @@ import java.util.List;
 public class RegisterController {
     private final CreateRegisterInteractor createRegisterInteractor;
     private final GetRegisterInteractor getRegisterInteractor;
+    private final UpdateRegisterInteractor updateRegisterInteractor;
 
-    public RegisterController(CreateRegisterInteractor createRegisterInteractor, GetRegisterInteractor getRegisterInteractor) {
+    public RegisterController(CreateRegisterInteractor createRegisterInteractor, GetRegisterInteractor getRegisterInteractor, UpdateRegisterInteractor updateRegisterInteractor) {
         this.createRegisterInteractor = createRegisterInteractor;
         this.getRegisterInteractor = getRegisterInteractor;
+        this.updateRegisterInteractor = updateRegisterInteractor;
     }
 
     @PostMapping()
@@ -58,4 +61,18 @@ public class RegisterController {
                 .status(HttpStatus.OK)
                 .body(response);
     }
+
+    @PutMapping("{id}")
+    ResponseEntity<ApiReponse<RegisterResponse>> updateResponse(
+            @PathVariable("id") int id,
+            @RequestBody CreateRegisterRequest request,
+            @RequestHeader("Authorization") String token) throws Exception {
+        ApiReponse<RegisterResponse> reponse = new ApiReponse<>(
+                "Register edited successfully",
+                updateRegisterInteractor.updateRegister(id, request, token));
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(reponse);
+    }
 }
+

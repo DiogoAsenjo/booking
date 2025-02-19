@@ -1,6 +1,7 @@
 package com.canoacaicara.register.infrastructure.gateways;
 
 import com.canoacaicara.common.enums.ActivityType;
+import com.canoacaicara.register.application.exceptions.RegisterNotFoundException;
 import com.canoacaicara.register.application.mapper.RegisterDTOMapper;
 import com.canoacaicara.register.domain.Register;
 import com.canoacaicara.register.infrastructure.controllers.AllRegistersResponse;
@@ -50,5 +51,11 @@ public class RegisterRepositoryGateway implements RegisterGateway{
     public List<Register> getUserRegisterByDate(int userId, LocalDate startOfMonth, LocalDate endOfMonth) {
         List<RegisterEntity> register = registerRepository.findByUserIdAndDateBetween(userId, startOfMonth, endOfMonth);
         return register.stream().map(registerEntityMapper::toDomain).toList();
+    }
+
+    @Override
+    public Register getRegisterById(int registerId) {
+        RegisterEntity register = registerRepository.findById(registerId).orElseThrow(() -> new RegisterNotFoundException("Register not found"));
+        return registerEntityMapper.toDomain(register);
     }
 }

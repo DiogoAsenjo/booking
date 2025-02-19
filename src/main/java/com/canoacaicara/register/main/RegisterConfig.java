@@ -3,6 +3,7 @@ package com.canoacaicara.register.main;
 import com.canoacaicara.register.application.mapper.RegisterDTOMapper;
 import com.canoacaicara.register.application.usecases.CreateRegisterInteractor;
 import com.canoacaicara.register.application.usecases.GetRegisterInteractor;
+import com.canoacaicara.register.application.usecases.UpdateRegisterInteractor;
 import com.canoacaicara.register.infrastructure.gateways.RegisterEntityMapper;
 import com.canoacaicara.register.infrastructure.gateways.RegisterGateway;
 import com.canoacaicara.register.infrastructure.gateways.RegisterRepositoryGateway;
@@ -22,6 +23,11 @@ public class RegisterConfig {
     @Bean
     GetRegisterInteractor getRegisterInteractor(RegisterGateway registerGateway, RegisterDTOMapper registerDTOMapper, JWTService jwtService) {
         return new GetRegisterInteractor(registerGateway, registerDTOMapper, jwtService);
+    }
+
+    @Bean
+    UpdateRegisterInteractor updateRegisterInteractor(RegisterGateway registerGateway, RegisterDTOMapper registerDTOMapper, JWTService jwtService) {
+        return new UpdateRegisterInteractor(registerGateway, registerDTOMapper, jwtService);
     }
 
     @Bean

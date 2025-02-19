@@ -15,4 +15,5 @@ public interface RegisterGateway {
     List<AllRegistersResponse> getAllRegisters();
     List<Register> getUserRegisterByDateAndType(int userID, LocalDate date, ActivityType activityType);
     List<Register> getUserRegisterByDate(int userID, LocalDate startOfMonth, LocalDate endOfMonth);
+    Register getRegisterById(int registerId);
 }

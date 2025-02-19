@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -22,20 +23,28 @@ public class RegisterController {
     }
 
     @PostMapping()
-    ResponseEntity<ApiReponse<RegisterResponse>> createRegister(@Valid @RequestBody CreateRegisterRequest request, @RequestHeader("Authorization") String token) throws Exception {
+    ResponseEntity<ApiReponse<RegisterResponse>> createRegister(
+            @Valid @RequestBody CreateRegisterRequest request,
+            @RequestHeader("Authorization") String token) throws Exception {
         ApiReponse<RegisterResponse> response = new ApiReponse<>("Register created", createRegisterInteractor.createRegister(request, token));
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(response);
     }
 
     @GetMapping()
     ResponseEntity<ApiReponse<List<RegisterResponse>>> getUserRegisters(@RequestHeader("Authorization") String token) {
         ApiReponse<List<RegisterResponse>> response = new ApiReponse<>("Registers found", getRegisterInteractor.getUserRegisters(token));
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
     }
 
     @GetMapping("/all")
     ResponseEntity<ApiReponse<List<AllRegistersResponse>>> getAllRegisters() {
         ApiReponse<List<AllRegistersResponse>> response = new ApiReponse<>("Registers found", getRegisterInteractor.getAllRegisters());
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
     }
 }

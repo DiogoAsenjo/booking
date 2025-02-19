@@ -1,12 +1,14 @@
 package com.canoacaicara.register.infrastructure.gateways;
 
-import com.canoacaicara.register.application.exceptions.RegisterNotFoundException;
+import com.canoacaicara.common.enums.ActivityType;
 import com.canoacaicara.register.application.mapper.RegisterDTOMapper;
 import com.canoacaicara.register.domain.Register;
 import com.canoacaicara.register.infrastructure.controllers.AllRegistersResponse;
 import com.canoacaicara.register.infrastructure.persistance.RegisterEntity;
 import com.canoacaicara.register.infrastructure.persistance.RegisterRepository;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class RegisterRepositoryGateway implements RegisterGateway{
@@ -37,5 +39,11 @@ public class RegisterRepositoryGateway implements RegisterGateway{
     public List<AllRegistersResponse> getAllRegisters() {
         List<RegisterEntity> registers = registerRepository.findAll();
         return registers.stream().map(registerDTOMapper::toAllRegistersResponse).toList();
+    }
+
+    @Override
+    public List<Register> getUserRegisterByDateAndType(int userId, LocalDate date, ActivityType activityType) {
+        List<RegisterEntity> register = registerRepository.findByUserIdAndDateAndActivityType(userId, date, activityType);
+        return register.stream().map(registerEntityMapper::toDomain).toList();
     }
 }

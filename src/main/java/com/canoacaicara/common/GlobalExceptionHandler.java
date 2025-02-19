@@ -1,5 +1,7 @@
 package com.canoacaicara.common;
 
+import com.canoacaicara.register.application.exceptions.RegisterCreationException;
+import com.canoacaicara.register.application.exceptions.RegisterNotFoundException;
 import com.canoacaicara.user.application.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,18 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiReponse> handleUserNotFoundException(Exception e) {
         ApiReponse response = new ApiReponse<>(e.getMessage(), null);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ExceptionHandler(RegisterNotFoundException.class)
+    public ResponseEntity<ApiReponse> handleRegisterNotFoundException(Exception e) {
+        ApiReponse response = new ApiReponse<>(e.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ExceptionHandler(RegisterCreationException.class)
+    public ResponseEntity<ApiReponse> RegisterCreationException(Exception e) {
+        ApiReponse response = new ApiReponse<>(e.getMessage(), null);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

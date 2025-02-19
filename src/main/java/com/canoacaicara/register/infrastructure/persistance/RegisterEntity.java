@@ -4,7 +4,9 @@ import com.canoacaicara.common.enums.ActivityType;
 import com.canoacaicara.user.infrastructure.persistance.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -21,7 +23,7 @@ public class RegisterEntity {
 
     @NotNull
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private LocalDate date;
 
     private int quantity;
 
@@ -32,7 +34,7 @@ public class RegisterEntity {
     //Constructors
     public RegisterEntity() {}
 
-    public RegisterEntity(UserEntity user, Date date, int quantity, ActivityType activityType) {
+    public RegisterEntity(UserEntity user, LocalDate date, int quantity, ActivityType activityType) {
         this.user = user;
         this.date = date;
         this.quantity = quantity;
@@ -57,11 +59,11 @@ public class RegisterEntity {
         this.user = user;
     }
 
-    public @NotNull Date getDate() {
+    public @NotNull LocalDate getDate() {
         return date;
     }
 
-    public void setDate(@NotNull Date date) {
+    public void setDate(@NotNull LocalDate date) {
         this.date = date;
     }
 

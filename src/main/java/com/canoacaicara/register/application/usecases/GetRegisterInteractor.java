@@ -6,7 +6,6 @@ import com.canoacaicara.register.domain.Register;
 import com.canoacaicara.register.infrastructure.controllers.AllRegistersResponse;
 import com.canoacaicara.register.infrastructure.controllers.RegisterResponse;
 import com.canoacaicara.register.infrastructure.gateways.RegisterGateway;
-import com.canoacaicara.register.infrastructure.persistance.RegisterEntity;
 import com.canoacaicara.security.jwt.JWTService;
 
 import java.util.List;

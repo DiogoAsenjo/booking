@@ -2,10 +2,10 @@ package com.canoacaicara.register.infrastructure.controllers;
 
 import com.canoacaicara.common.enums.ActivityType;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public record AllRegistersResponse(
-        Date date,
+        LocalDate date,
         int quantity,
         ActivityType activityType,
         String responsible

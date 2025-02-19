@@ -8,6 +8,7 @@ import com.canoacaicara.register.infrastructure.controllers.RegisterResponse;
 import com.canoacaicara.register.infrastructure.gateways.RegisterGateway;
 import com.canoacaicara.security.jwt.JWTService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class GetRegisterInteractor {
@@ -42,5 +43,22 @@ public class GetRegisterInteractor {
         }
 
         return registersFound;
+    }
+
+    public List<RegisterResponse> getUserRegistersByMonth(String token, LocalDate date) {
+        String clearToken = jwtService.clearToken(token);
+        int userId = jwtService.getUserIdFromToken(clearToken);
+
+        LocalDate firstDayOfMonth = date.withDayOfMonth(1);
+        LocalDate lastDayOfMonth = date.withDayOfMonth(date.lengthOfMonth());
+
+        List<Register> registersFound = registerGateway.getUserRegisterByDate(userId, firstDayOfMonth, lastDayOfMonth);
+
+        if (registersFound.isEmpty()) {
+            throw new RegisterNotFoundException("Registers not found");
+        }
+
+        return registersFound.stream().map(registerDTOMapper::toResponse).toList();
+
     }
 }

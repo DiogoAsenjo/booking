@@ -8,7 +8,6 @@ import com.canoacaicara.register.infrastructure.persistance.RegisterEntity;
 import com.canoacaicara.register.infrastructure.persistance.RegisterRepository;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class RegisterRepositoryGateway implements RegisterGateway{
@@ -44,6 +43,12 @@ public class RegisterRepositoryGateway implements RegisterGateway{
     @Override
     public List<Register> getUserRegisterByDateAndType(int userId, LocalDate date, ActivityType activityType) {
         List<RegisterEntity> register = registerRepository.findByUserIdAndDateAndActivityType(userId, date, activityType);
+        return register.stream().map(registerEntityMapper::toDomain).toList();
+    }
+
+    @Override
+    public List<Register> getUserRegisterByDate(int userId, LocalDate startOfMonth, LocalDate endOfMonth) {
+        List<RegisterEntity> register = registerRepository.findByUserIdAndDateBetween(userId, startOfMonth, endOfMonth);
         return register.stream().map(registerEntityMapper::toDomain).toList();
     }
 }

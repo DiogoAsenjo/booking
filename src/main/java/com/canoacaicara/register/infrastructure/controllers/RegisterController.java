@@ -4,10 +4,12 @@ import com.canoacaicara.common.ApiReponse;
 import com.canoacaicara.register.application.usecases.CreateRegisterInteractor;
 import com.canoacaicara.register.application.usecases.GetRegisterInteractor;
 import jakarta.validation.Valid;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +45,17 @@ public class RegisterController {
     @GetMapping("/all")
     ResponseEntity<ApiReponse<List<AllRegistersResponse>>> getAllRegisters() {
         ApiReponse<List<AllRegistersResponse>> response = new ApiReponse<>("Registers found", getRegisterInteractor.getAllRegisters());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
+    }
+
+    @GetMapping("/byMonth")
+    ResponseEntity<ApiReponse<List<RegisterResponse>>> getUserRegistersByMonth(
+            @RequestParam(name = "date", required = false) LocalDate date,
+            @RequestHeader("Authorization") String token) {
+        LocalDate monthParam = (date == null) ? LocalDate.now() : date;
+        ApiReponse<List<RegisterResponse>> response = new ApiReponse<>("Registers found", getRegisterInteractor.getUserRegistersByMonth(token, monthParam));
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(response);

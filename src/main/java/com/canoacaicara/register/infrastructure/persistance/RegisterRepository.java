@@ -9,4 +9,5 @@ import java.util.List;
 public interface RegisterRepository extends JpaRepository<RegisterEntity, Integer> {
     List<RegisterEntity> findByUserId(int userId);
     List<RegisterEntity> findByUserIdAndDateAndActivityType(int userId, LocalDate date, ActivityType activityType);
+    List<RegisterEntity> findByUserIdAndDateBetween(int userId, LocalDate startOfMonth, LocalDate endOfMonth);
 }

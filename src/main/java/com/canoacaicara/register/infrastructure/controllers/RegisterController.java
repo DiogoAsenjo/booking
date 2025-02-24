@@ -67,12 +67,12 @@ public class RegisterController {
             @PathVariable("id") int id,
             @RequestBody CreateRegisterRequest request,
             @RequestHeader("Authorization") String token) throws Exception {
-        ApiReponse<RegisterResponse> reponse = new ApiReponse<>(
+        ApiReponse<RegisterResponse> response = new ApiReponse<>(
                 "Register edited successfully",
                 updateRegisterInteractor.updateRegister(id, request, token));
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(reponse);
+                .body(response);
     }
 }
 

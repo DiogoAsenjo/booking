@@ -46,6 +46,11 @@ public class RegisterRepositoryGateway implements RegisterGateway{
         List<RegisterEntity> register = registerRepository.findByUserIdAndDateAndActivityType(userId, date, activityType);
         return register.stream().map(registerEntityMapper::toDomain).toList();
     }
+    @Override
+    public List<Register> getUserRegisterByDateAndTypeExcludingId(int userId, LocalDate date, ActivityType activityType, int registerId) {
+        List<RegisterEntity> register = registerRepository.findByUserIdAndDateAndActivityTypeAndIdNot(userId, date, activityType, registerId);
+        return register.stream().map(registerEntityMapper::toDomain).toList();
+    }
 
     @Override
     public List<Register> getUserRegisterByDate(int userId, LocalDate startOfMonth, LocalDate endOfMonth) {
@@ -57,5 +62,12 @@ public class RegisterRepositoryGateway implements RegisterGateway{
     public Register getRegisterById(int registerId) {
         RegisterEntity register = registerRepository.findById(registerId).orElseThrow(() -> new RegisterNotFoundException("Register not found"));
         return registerEntityMapper.toDomain(register);
+    }
+
+    @Override
+    public Register updateRegister(Register register) {
+        RegisterEntity registerEntity = registerEntityMapper.toEntity(register);
+        RegisterEntity registerSaved = registerRepository.save(registerEntity);
+        return registerEntityMapper.toDomain(registerSaved);
     }
 }

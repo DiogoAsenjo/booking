@@ -15,10 +15,14 @@ public class RegisterEntityMapper {
 
     RegisterEntity toEntity(Register registerDomain) {
         UserEntity user = userRepository.findById(registerDomain.userId()).orElseThrow(() -> new UserNotFoundException("User not found"));
-        return new RegisterEntity(user, registerDomain.date(), registerDomain.quantity(), registerDomain.activityType());
+        if (registerDomain.id() == null) {
+            return new RegisterEntity(user, registerDomain.date(), registerDomain.quantity(), registerDomain.activityType());
+        }
+        return new RegisterEntity(registerDomain.id(), user, registerDomain.date(), registerDomain.quantity(), registerDomain.activityType());
     }
 
     Register toDomain(RegisterEntity registerEntity) {
+        RegisterEntity register = registerEntity;
         return new Register(registerEntity.getId(), registerEntity.getUser().getId(), registerEntity.getActivityType(), registerEntity.getDate(), registerEntity.getQuantity());
     }
 }

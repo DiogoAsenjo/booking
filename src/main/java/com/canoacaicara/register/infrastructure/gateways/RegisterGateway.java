@@ -14,6 +14,8 @@ public interface RegisterGateway {
     List<Register> getUserRegisters(int userId);
     List<AllRegistersResponse> getAllRegisters();
     List<Register> getUserRegisterByDateAndType(int userID, LocalDate date, ActivityType activityType);
+    List<Register> getUserRegisterByDateAndTypeExcludingId(int userId, LocalDate date, ActivityType activityType, int registerId);
     List<Register> getUserRegisterByDate(int userID, LocalDate startOfMonth, LocalDate endOfMonth);
     Register getRegisterById(int registerId);
+    Register updateRegister(Register register);
 }

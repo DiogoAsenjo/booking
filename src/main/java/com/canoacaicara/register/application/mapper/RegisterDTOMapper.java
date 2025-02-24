@@ -15,6 +15,10 @@ public class RegisterDTOMapper {
         return new Register(userId, request.activityType(),request.date(), request.quantity());
     }
 
+    public Register toRegisterWithId(CreateRegisterRequest request, int userId, int registerId) {
+        return new Register(registerId, userId, request.activityType(),request.date(), request.quantity());
+    }
+
     public AllRegistersResponse toAllRegistersResponse(RegisterEntity register) {
         return new AllRegistersResponse(register.getId(), register.getDate(), register.getQuantity(), register.getActivityType(), register.getUser().getName());
     }

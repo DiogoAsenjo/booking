@@ -41,6 +41,14 @@ public class RegisterEntity {
         this.activityType = activityType;
     }
 
+    public RegisterEntity(int id, UserEntity user, LocalDate date, int quantity, ActivityType activityType) {
+        this.id = id;
+        this.user = user;
+        this.date = date;
+        this.quantity = quantity;
+        this.activityType = activityType;
+    }
+
     //Getter and setter
 
     public int getId() {

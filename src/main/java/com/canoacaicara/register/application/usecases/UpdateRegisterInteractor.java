@@ -26,8 +26,24 @@ public class UpdateRegisterInteractor {
         int userId = jwtService.getUserIdFromToken(clearToken);
 
         Register registerFound = registerGateway.getRegisterById(registerId);
-        //TODO Criar a validacao se é de fato do usuário que chamou e se não não possui um registro aquele dia para aquele tipo.
 
-        return registerDTOMapper.toResponse(registerFound);
+        if (registerFound.userId() != userId) {
+            throw new RegisterCreationException("You're not responsible for this register!");
+        }
+
+        List<Register> registerWithTheSameDateAndType = registerGateway.getUserRegisterByDateAndTypeExcludingId(userId, request.date(), request.activityType(), registerId);
+
+        if (!registerWithTheSameDateAndType.isEmpty()) {
+            throw new RegisterCreationException("You already have a register of this type in this date!");
+        }
+
+        Register registerToBeUpdated = registerDTOMapper.toRegisterWithId(request, userId, registerId);
+
+        try {
+            Register registerUpdated = registerGateway.updateRegister(registerToBeUpdated);
+            return registerDTOMapper.toResponse(registerUpdated);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }

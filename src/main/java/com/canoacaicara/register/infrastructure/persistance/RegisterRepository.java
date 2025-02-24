@@ -10,4 +10,5 @@ public interface RegisterRepository extends JpaRepository<RegisterEntity, Intege
     List<RegisterEntity> findByUserId(int userId);
     List<RegisterEntity> findByUserIdAndDateAndActivityType(int userId, LocalDate date, ActivityType activityType);
     List<RegisterEntity> findByUserIdAndDateBetween(int userId, LocalDate startOfMonth, LocalDate endOfMonth);
+    List<RegisterEntity> findByUserIdAndDateAndActivityTypeAndIdNot(int userId, LocalDate date, ActivityType activityType, int registerId);
 }

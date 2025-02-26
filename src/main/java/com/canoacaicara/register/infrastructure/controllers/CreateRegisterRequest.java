@@ -11,7 +11,7 @@ public record CreateRegisterRequest(
         LocalDate date,
 
         @NotNull(message = "Quantity is mandatory")
-                @Positive(message = "Quantity should be positive")
+        @Positive(message = "Quantity should be positive")
         int quantity,
 
         @NotNull(message = "Activity type is mandatory")

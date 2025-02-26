@@ -1,6 +1,6 @@
 package com.canoacaicara.register.application.usecases;
 
-import com.canoacaicara.register.application.exceptions.RegisterCreationException;
+import com.canoacaicara.register.application.exceptions.RegisterManipulationException;
 import com.canoacaicara.register.application.mapper.RegisterDTOMapper;
 import com.canoacaicara.register.domain.Register;
 import com.canoacaicara.register.infrastructure.controllers.CreateRegisterRequest;
@@ -29,7 +29,7 @@ public class CreateRegisterInteractor {
         List<Register> registerWithTheSameDateAndType = registerGateway.getUserRegisterByDateAndType(userId, request.date(), request.activityType());
 
         if (!registerWithTheSameDateAndType.isEmpty()) {
-            throw new RegisterCreationException("You already have a register of this type in this date!");
+            throw new RegisterManipulationException("You already have a register of this type in this date!");
         }
 
         try {

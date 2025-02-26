@@ -70,4 +70,9 @@ public class RegisterRepositoryGateway implements RegisterGateway{
         RegisterEntity registerSaved = registerRepository.save(registerEntity);
         return registerEntityMapper.toDomain(registerSaved);
     }
+
+    @Override
+    public void deleteRegister(int registerId) {
+        registerRepository.deleteById(registerId);
+    }
 }

@@ -18,4 +18,5 @@ public interface RegisterGateway {
     List<Register> getUserRegisterByDate(int userID, LocalDate startOfMonth, LocalDate endOfMonth);
     Register getRegisterById(int registerId);
     Register updateRegister(Register register);
+    void deleteRegister(int registerId);
 }

@@ -1,6 +1,6 @@
 package com.canoacaicara.common;
 
-import com.canoacaicara.register.application.exceptions.RegisterCreationException;
+import com.canoacaicara.register.application.exceptions.RegisterManipulationException;
 import com.canoacaicara.register.application.exceptions.RegisterNotFoundException;
 import com.canoacaicara.user.application.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
-    @ExceptionHandler(RegisterCreationException.class)
+    @ExceptionHandler(RegisterManipulationException.class)
     public ResponseEntity<ApiReponse> RegisterCreationException(Exception e) {
         ApiReponse response = new ApiReponse<>(e.getMessage(), null);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);

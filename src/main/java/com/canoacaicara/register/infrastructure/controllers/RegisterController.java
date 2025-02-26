@@ -2,6 +2,7 @@ package com.canoacaicara.register.infrastructure.controllers;
 
 import com.canoacaicara.common.ApiReponse;
 import com.canoacaicara.register.application.usecases.CreateRegisterInteractor;
+import com.canoacaicara.register.application.usecases.DeleteRegisterInteractor;
 import com.canoacaicara.register.application.usecases.GetRegisterInteractor;
 import com.canoacaicara.register.application.usecases.UpdateRegisterInteractor;
 import jakarta.validation.Valid;
@@ -18,11 +19,13 @@ public class RegisterController {
     private final CreateRegisterInteractor createRegisterInteractor;
     private final GetRegisterInteractor getRegisterInteractor;
     private final UpdateRegisterInteractor updateRegisterInteractor;
+    private final DeleteRegisterInteractor deleteRegisterInteractor;
 
-    public RegisterController(CreateRegisterInteractor createRegisterInteractor, GetRegisterInteractor getRegisterInteractor, UpdateRegisterInteractor updateRegisterInteractor) {
+    public RegisterController(CreateRegisterInteractor createRegisterInteractor, GetRegisterInteractor getRegisterInteractor, UpdateRegisterInteractor updateRegisterInteractor, DeleteRegisterInteractor deleteRegisterInteractor) {
         this.createRegisterInteractor = createRegisterInteractor;
         this.getRegisterInteractor = getRegisterInteractor;
         this.updateRegisterInteractor = updateRegisterInteractor;
+        this.deleteRegisterInteractor = deleteRegisterInteractor;
     }
 
     @PostMapping()
@@ -74,5 +77,22 @@ public class RegisterController {
                 .status(HttpStatus.OK)
                 .body(response);
     }
+
+    @DeleteMapping("{id}")
+    ResponseEntity<ApiReponse<Void>> deleteResponse(
+            @PathVariable("id") int id,
+            @RequestHeader("Authorization") String token) throws Exception {
+
+        deleteRegisterInteractor.deleteRegister(id, token);
+
+        ApiReponse<Void> response = new ApiReponse<>(
+                "Registed deleted successfully",
+                null
+                );
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
+    }
+
 }
 

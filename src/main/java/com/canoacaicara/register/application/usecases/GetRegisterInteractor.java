@@ -4,6 +4,7 @@ import com.canoacaicara.register.application.exceptions.RegisterNotFoundExceptio
 import com.canoacaicara.register.application.mapper.RegisterDTOMapper;
 import com.canoacaicara.register.domain.Register;
 import com.canoacaicara.register.infrastructure.controllers.AllRegistersResponse;
+import com.canoacaicara.register.infrastructure.controllers.RegisterByMonthResponse;
 import com.canoacaicara.register.infrastructure.controllers.RegisterResponse;
 import com.canoacaicara.register.infrastructure.gateways.RegisterGateway;
 import com.canoacaicara.security.jwt.JWTService;
@@ -15,11 +16,13 @@ public class GetRegisterInteractor {
     private final RegisterGateway registerGateway;
     private final RegisterDTOMapper registerDTOMapper;
     private final JWTService jwtService;
+    private final CalculatePaymentInteractor calculatePaymentInteractor;
 
-    public GetRegisterInteractor(RegisterGateway registerGateway, RegisterDTOMapper registerDTOMapper, JWTService jwtService) {
+    public GetRegisterInteractor(RegisterGateway registerGateway, RegisterDTOMapper registerDTOMapper, JWTService jwtService, CalculatePaymentInteractor calculatePaymentInteractor) {
         this.registerGateway = registerGateway;
         this.registerDTOMapper = registerDTOMapper;
         this.jwtService = jwtService;
+        this.calculatePaymentInteractor = calculatePaymentInteractor;
     }
 
     public List<RegisterResponse> getUserRegisters(String token) {
@@ -45,7 +48,7 @@ public class GetRegisterInteractor {
         return registersFound;
     }
 
-    public List<RegisterResponse> getUserRegistersByMonth(String token, LocalDate date) {
+    public RegisterByMonthResponse getUserRegistersByMonth(String token, LocalDate date) {
         String clearToken = jwtService.clearToken(token);
         int userId = jwtService.getUserIdFromToken(clearToken);
 
@@ -58,7 +61,9 @@ public class GetRegisterInteractor {
             throw new RegisterNotFoundException("Registers not found");
         }
 
-        return registersFound.stream().map(registerDTOMapper::toResponse).toList();
+        int earnings = calculatePaymentInteractor.calculateEarnings(registersFound);
+
+        return new RegisterByMonthResponse(earnings, registersFound.stream().map(registerDTOMapper::toResponse).toList());
 
     }
 }

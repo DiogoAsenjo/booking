@@ -1,7 +1,6 @@
 package com.canoacaicara.register.domain;
 
 import com.canoacaicara.common.enums.ActivityType;
-import com.canoacaicara.common.enums.Roles;
 
 import java.time.LocalDate;
 

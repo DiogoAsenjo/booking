@@ -1,10 +1,7 @@
 package com.canoacaicara.register.main;
 
 import com.canoacaicara.register.application.mapper.RegisterDTOMapper;
-import com.canoacaicara.register.application.usecases.CreateRegisterInteractor;
-import com.canoacaicara.register.application.usecases.DeleteRegisterInteractor;
-import com.canoacaicara.register.application.usecases.GetRegisterInteractor;
-import com.canoacaicara.register.application.usecases.UpdateRegisterInteractor;
+import com.canoacaicara.register.application.usecases.*;
 import com.canoacaicara.register.infrastructure.gateways.RegisterEntityMapper;
 import com.canoacaicara.register.infrastructure.gateways.RegisterGateway;
 import com.canoacaicara.register.infrastructure.gateways.RegisterRepositoryGateway;
@@ -22,8 +19,8 @@ public class RegisterConfig {
     }
 
     @Bean
-    GetRegisterInteractor getRegisterInteractor(RegisterGateway registerGateway, RegisterDTOMapper registerDTOMapper, JWTService jwtService) {
-        return new GetRegisterInteractor(registerGateway, registerDTOMapper, jwtService);
+    GetRegisterInteractor getRegisterInteractor(RegisterGateway registerGateway, RegisterDTOMapper registerDTOMapper, JWTService jwtService, CalculatePaymentInteractor calculatePaymentInteractor) {
+        return new GetRegisterInteractor(registerGateway, registerDTOMapper, jwtService, calculatePaymentInteractor);
     }
 
     @Bean
@@ -34,6 +31,11 @@ public class RegisterConfig {
     @Bean
     DeleteRegisterInteractor deleteRegisterInteractor(RegisterGateway registerGateway, RegisterDTOMapper registerDTOMapper, JWTService jwtService) {
         return new DeleteRegisterInteractor(registerGateway, registerDTOMapper, jwtService);
+    }
+
+    @Bean
+    CalculatePaymentInteractor calculatePaymentInteractor() {
+        return new CalculatePaymentInteractor();
     }
 
     @Bean

@@ -55,11 +55,11 @@ public class RegisterController {
     }
 
     @GetMapping("/byMonth")
-    ResponseEntity<ApiReponse<List<RegisterResponse>>> getUserRegistersByMonth(
+    ResponseEntity<ApiReponse<RegisterByMonthResponse>> getUserRegistersByMonth(
             @RequestParam(name = "date", required = false) LocalDate date,
             @RequestHeader("Authorization") String token) {
         LocalDate monthParam = (date == null) ? LocalDate.now() : date;
-        ApiReponse<List<RegisterResponse>> response = new ApiReponse<>("Registers found", getRegisterInteractor.getUserRegistersByMonth(token, monthParam));
+        ApiReponse<RegisterByMonthResponse> response = new ApiReponse<>("Registers found", getRegisterInteractor.getUserRegistersByMonth(token, monthParam));
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(response);

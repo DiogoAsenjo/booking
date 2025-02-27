@@ -7,9 +7,11 @@ import com.canoacaicara.register.infrastructure.controllers.CreateRegisterReques
 import com.canoacaicara.register.infrastructure.controllers.RegisterResponse;
 import com.canoacaicara.register.infrastructure.gateways.RegisterGateway;
 import com.canoacaicara.security.jwt.JWTService;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+@Slf4j
 public class CreateRegisterInteractor {
     private final RegisterGateway registerGateway;
     private final RegisterDTOMapper registerDTOMapper;
@@ -33,9 +35,12 @@ public class CreateRegisterInteractor {
         }
 
         try {
+            log.info("User: {} trying to create a new Register", jwtService.getEmailFromToken(clearToken));
             Register registerCreated = registerGateway.createRegister(registerDomain);
+            log.info("User: {} created a new Register with id: {}", jwtService.getEmailFromToken(clearToken), registerCreated.id());
             return registerDTOMapper.toResponse(registerCreated);
         } catch (Exception e) {
+            log.error("User: {} had a problem trying to create a new Register. {}", jwtService.getEmailFromToken(clearToken), e.toString());
             throw new Exception(e.getMessage());
         }
     }

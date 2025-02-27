@@ -1,0 +1,9 @@
+2025-02-27 15:43 INFO  com.canoacaicara.CanoaCaicara - Starting CanoaCaicara using Java 17.0.9 with PID 17276 (C:\Users\Diogo\Desktop\Cursos\booking\target\classes started by Diogo Asenjo in C:\Users\Diogo\Desktop\Cursos\booking)
+2025-02-27 15:43 DEBUG com.canoacaicara.CanoaCaicara - Running with Spring Boot v3.3.5, Spring v6.1.14
+2025-02-27 15:43 INFO  com.canoacaicara.CanoaCaicara - No active profile set, falling back to 1 default profile: "default"
+2025-02-27 15:43 DEBUG c.c.s.jwt.AuthenticationFilter - Filter 'authenticationFilter' configured for use
+2025-02-27 15:43 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-27 15:44 INFO  com.canoacaicara.CanoaCaicara - Started CanoaCaicara in 10.569 seconds (process running for 11.195)
+2025-02-27 15:44 INFO  com.canoacaicara.CanoaCaicara - Application running
+2025-02-27 15:44 INFO  c.c.r.a.u.CreateRegisterInteractor - User: marcelodino@outlook.com trying to create a new Register
+2025-02-27 15:44 INFO  c.c.r.a.u.CreateRegisterInteractor - User: marcelodino@outlook.com created a new Register with id: 25

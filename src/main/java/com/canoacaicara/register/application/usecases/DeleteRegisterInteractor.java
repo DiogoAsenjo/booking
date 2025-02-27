@@ -5,7 +5,9 @@ import com.canoacaicara.register.application.mapper.RegisterDTOMapper;
 import com.canoacaicara.register.domain.Register;
 import com.canoacaicara.register.infrastructure.gateways.RegisterGateway;
 import com.canoacaicara.security.jwt.JWTService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class DeleteRegisterInteractor {
     private final RegisterGateway registerGateway;
     private final RegisterDTOMapper registerDTOMapper;
@@ -28,8 +30,11 @@ public class DeleteRegisterInteractor {
         }
 
         try {
+            log.info("User: {} trying to delete a Register with id: {}", jwtService.getEmailFromToken(clearToken), registerFound.id());
             registerGateway.deleteRegister(registerId);
+            log.info("User: {} deleted a Register with id: {}", jwtService.getEmailFromToken(clearToken), registerFound.id());
         } catch (Exception e) {
+            log.error("User: {} failed to delete a Register with id: {}, because: {}", jwtService.getEmailFromToken(clearToken), registerFound.id(), e.toString());
             throw new Exception(e.getMessage());
         }
     }

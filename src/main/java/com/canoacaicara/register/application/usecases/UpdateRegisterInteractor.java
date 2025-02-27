@@ -7,9 +7,11 @@ import com.canoacaicara.register.infrastructure.controllers.CreateRegisterReques
 import com.canoacaicara.register.infrastructure.controllers.RegisterResponse;
 import com.canoacaicara.register.infrastructure.gateways.RegisterGateway;
 import com.canoacaicara.security.jwt.JWTService;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+@Slf4j
 public class UpdateRegisterInteractor {
     private final RegisterGateway registerGateway;
     private final RegisterDTOMapper registerDTOMapper;
@@ -40,9 +42,12 @@ public class UpdateRegisterInteractor {
         Register registerToBeUpdated = registerDTOMapper.toRegisterWithId(request, userId, registerId);
 
         try {
+            log.info("User: {} trying to edit a Register with id: {}", jwtService.getEmailFromToken(clearToken), registerToBeUpdated.id());
             Register registerUpdated = registerGateway.updateRegister(registerToBeUpdated);
+            log.info("User: {} edited Register with id: {}", jwtService.getEmailFromToken(clearToken), registerUpdated.id());
             return registerDTOMapper.toResponse(registerUpdated);
         } catch (Exception e) {
+            log.error("User: {} failed to edit a Register with id: {}, because: {}", jwtService.getEmailFromToken(clearToken), registerToBeUpdated.id(), e.toString());
             throw new Exception(e.getMessage());
         }
     }
